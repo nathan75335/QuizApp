@@ -5,8 +5,8 @@ namespace QuizMaster.BusinessLogic.Services.Interfaces;
 
 public interface IUserQuizService
 {
-    Task<UserQuizDto> StartUserQuizAsync(UserQuizRequest request);
-    Task<UserQuizDto> GetUserQuizByIdAsync(int id);
-    Task<List<UserQuizDto>> GetAllUserQuizzesAsync();
-    Task<UserQuizDto> SubmitUserQuizResponseAsync(UserQuizRequest request, List<AnswerOptionRequest> selectedAnswers);
+    Task<UserQuizDto> GetUserQuizByIdAsync(int userQuizId);
+    Task<UserQuizDto> AddUserQuizAsync(UserQuizRequest userQuizRequest);
+    Task<UserQuizDto> UpdateUserQuizAsync(int userQuizId, UserQuizRequest userQuizRequest);
+    Task<UserQuizDto> DeleteUserQuizAsync(int userQuizId);
 }

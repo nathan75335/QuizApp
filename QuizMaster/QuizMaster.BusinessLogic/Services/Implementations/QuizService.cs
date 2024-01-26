@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿#region
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 using QuizMaster.BusinessLogic.Exceptions;
 using QuizMaster.BusinessLogic.Profiles.DTOs;
@@ -6,7 +7,7 @@ using QuizMaster.BusinessLogic.Requests;
 using QuizMaster.BusinessLogic.Services.Interfaces;
 using QuizMaster.DataAccess.Entities;
 using QuizMaster.DataAccess.Repositories.Interfaces;
-
+#endregion
 namespace QuizMaster.BusinessLogic.Services.Implementations;
 
 public class QuizService : IQuizService
@@ -63,9 +64,9 @@ public class QuizService : IQuizService
         return _mapper.Map<QuizDto>(quiz);
     }
 
-    public async Task<QuizDto> UpdateQuizAsync(QuizRequest request)
+    public async Task<QuizDto> UpdateQuizAsync(int id, QuizRequest request)
     {
-        var quiz = await _quizRepository.GetQuizByIdAsync(request.Id);
+        var quiz = await _quizRepository.GetQuizByIdAsync(id);
         if(quiz is null)
         {
             _logger.LogError("There is no quiz to update with that id");

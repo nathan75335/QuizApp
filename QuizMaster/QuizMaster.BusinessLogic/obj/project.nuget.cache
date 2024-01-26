@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JjrdMzaQsgLHjH1QI7EqHRMmH7PA8vW7vBuXBpkCJPFEeDw2ffg/rREKSaoI86DCyC39iM1rS5yoNxEUvbl13Q==",
+  "dgSpecHash": "efUgrclImnhugulRSDtpYhrKtt0n9mEPl7tqRqTZr2B0artFrH7TRw9P15L9E6knFLBbmrb69PCU8vMsRXRltQ==",
   "success": true,
   "projectFilePath": "E:\\WebAPI\\QuizApp\\QuizMaster\\QuizMaster.BusinessLogic\\QuizMaster.BusinessLogic.csproj",
   "expectedPackageFiles": [

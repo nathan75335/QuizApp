@@ -9,6 +9,6 @@ public interface IQuestionService
     Task<List<QuestionDto>> GetQuestionsByQuizAsync(int quizId);
     Task<List<QuestionDto>> GetAllQuestionsAsync();
     Task<QuestionDto> AddQuestionAsync(QuestionRequest questionRequest);
-    Task<QuestionDto> UpdateQuestionAsync(QuestionRequest questionRequest);
-    Task<QuestionDto> DeleteQuestionAsync(QuestionRequest questionRequest);
+    Task<QuestionDto> UpdateQuestionAsync(int id, QuestionRequest questionRequest);
+    Task<QuestionDto> DeleteQuestionAsync(int id);
 }

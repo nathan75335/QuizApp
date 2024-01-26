@@ -14,10 +14,8 @@ builder.Services.AddControllers();
 builder.ConfigureServices()
     .AddServiceCollectionExtensions();
 
-
 var app = builder.Build();
 
-await app.Configure();
 
 if (app.Environment.IsDevelopment())
 {
@@ -29,9 +27,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("any");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseHttpsRedirection();
 
-
+await app.Configure();
 app.UseAuthorization();
 
 app.MapControllers();

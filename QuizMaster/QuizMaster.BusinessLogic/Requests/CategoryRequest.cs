@@ -1,7 +1,9 @@
-﻿namespace QuizMaster.BusinessLogic.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QuizMaster.BusinessLogic.Requests;
 
 public class CategoryRequest
 {
-    public int Id {  get; set; }
+    [Required]
     public string Name { get; set; }
 }

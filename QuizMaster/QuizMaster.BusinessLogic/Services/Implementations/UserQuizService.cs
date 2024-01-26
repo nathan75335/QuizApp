@@ -1,12 +1,14 @@
-﻿using AutoMapper;
+﻿#region
+using AutoMapper;
 using Microsoft.Extensions.Logging;
 using QuizMaster.BusinessLogic.Exceptions;
 using QuizMaster.BusinessLogic.Profiles.DTOs;
 using QuizMaster.BusinessLogic.Requests;
 using QuizMaster.BusinessLogic.Services.Interfaces;
 using QuizMaster.DataAccess.Entities;
+using QuizMaster.DataAccess.Repositories.Implementations;
 using QuizMaster.DataAccess.Repositories.Interfaces;
-
+#endregion
 namespace QuizMaster.BusinessLogic.Services.Implementations;
 
 public class UserQuizService : IUserQuizService
@@ -22,6 +24,28 @@ public class UserQuizService : IUserQuizService
         _logger = logger;
     }
 
+    public async Task<UserQuizDto> AddUserQuizAsync(UserQuizRequest userQuizRequest)
+    {
+        var userQuiz = await _userQuizRepository.AddUserQuizAsync(_mapper.Map<UserQuiz>(userQuizRequest));
+        var score = await CalculateScore(userQuizRequest.QuizId, userQuizRequest.UserId, userQuizRequest.Answers);
+        userQuiz.Score = score;
+        return _mapper.Map<UserQuizDto>(userQuiz);
+    }
+
+    public async Task<UserQuizDto> DeleteUserQuizAsync(int userQuizId)
+    {
+        var result = await _userQuizRepository.GetUserQuizByIdAsync(userQuizId);
+
+        if (result is null)
+        {
+            _logger.LogError("There is no any user with that id");
+            throw new NotFoundException("There is not any user with such an id");
+        }
+
+        var userQuizDeleted = await _userQuizRepository.DeleteUserQuizAsync(result);
+
+        return _mapper.Map<UserQuizDto>(userQuizDeleted);
+    }
     public async Task<List<UserQuizDto>> GetAllUserQuizzesAsync()
     {
         var userQuizzes = await _userQuizRepository.GetAllUserQuizzesAsync();
@@ -34,38 +58,49 @@ public class UserQuizService : IUserQuizService
         var userQuiz = await _userQuizRepository.GetUserQuizByIdAsync(id);
         if(userQuiz is null)
         {
-            _logger.LogError("There is no any category with that id");
-            throw new NotFoundException("There is not any category with such an id");
+            _logger.LogError("There is no any user with that id");
+            throw new NotFoundException("There is not any user with such an id");
         }
 
         return _mapper.Map<UserQuizDto>(userQuiz);
     }
-
-    public async Task<UserQuizDto> StartUserQuizAsync(UserQuizRequest request)
+    public async Task<UserQuizDto> UpdateUserQuizAsync(int userQuizId, UserQuizRequest userQuizRequest)
     {
-        var userQuiz = _mapper.Map<UserQuiz>(request);
-        userQuiz.StartTime = DateTime.Now;
+        var userQuiz = await _userQuizRepository.GetUserQuizByIdAsync(userQuizId);
+        if (userQuiz == null)
+        {
+            _logger.LogError("There is no any user with that id");
+            throw new NotFoundException("There is not any user with such an id");
+        }
 
-        // since StartUserQuizAsync does not require userAnswers, and it's expexting a list of answers
-        // so i pass an empty list to UpdateUserQuizAsync
-        var startedUserQuiz = await _userQuizRepository.UpdateUserQuizAsync(userQuiz, new List<UserAnswer>());
-
-        return _mapper.Map<UserQuizDto>(startedUserQuiz);
+        _mapper.Map(userQuizRequest, userQuiz);
+        var updatedUserQuiz = await _userQuizRepository.UpdateUserQuizAsync(userQuiz);
+        return _mapper.Map<UserQuizDto>(updatedUserQuiz);
     }
 
-    public async Task<UserQuizDto> SubmitUserQuizResponseAsync(UserQuizRequest request, List<AnswerOptionRequest> selectedAnswers)
+    private async Task<int> CalculateScore(int quizId, int userId, List<QuizQuestion> userAnswers)
     {
-        var userQuiz = _mapper.Map<UserQuiz>(request);
-        userQuiz.EndTime = DateTime.Now;
-
-        var userAnswers = selectedAnswers.Select(answer => new UserAnswer
+        var quiz = await _userQuizRepository.GetUserQuizByIdAsync(quizId);
+        if (quiz == null)
         {
-            QuestionId = answer.QuestionId,
-            AnswerOptionId = answer.Id
-        }).ToList();
+            _logger.LogError("There is no any quiz with that id");
+            throw new NotFoundException("There is not any quiz with such an id");
+        }
 
-        var submitedUserQuiz = await _userQuizRepository.UpdateUserQuizAsync(userQuiz, userAnswers);
+        var totalScore = 0;
+        foreach (var userAnswer in userAnswers)
+        {
+            var question = quiz.Quiz.Questions.FirstOrDefault(q => q.QuestionId == userAnswer.QuestionId);
+            if (question != null)
+            {
+                var correctOption = question.Options.FirstOrDefault(opt => opt.IsCorrect);
+                if (correctOption != null && correctOption.OptionId == userAnswer.AnswerOptionId)
+                {
+                    totalScore += question.Point;
+                }
+            }
+        }
 
-        return _mapper.Map<UserQuizDto>(submitedUserQuiz);
+        return totalScore;
     }
 }

@@ -9,19 +9,16 @@ namespace QuizMaster.DataAccess.Entities;
 public class UserQuiz
 {
     [Key]
-    public int UserQuizId {  get; set; }
+    public int UserQuizId { get; set; }
 
     [ForeignKey(nameof(User))]
     public int UserId { get; set; }
     public User User { get; set; }
 
     [ForeignKey(nameof(Quiz))]
-    public int QuizId {  get; set; }
+    public int QuizId { get; set; }
     public Quiz Quiz { get; set; }
-    public int Score {  get; set; }
-    public DateTime StartTime { get; set; }
-    public DateTime? EndTime { get; set; }
-    public int TimeLit {  get; set; }
-    public List<UserAnswer> UserAnswers { get; set; }
+    public int Score { get; set; }
+    public int TimeLimit { get; set; }
 
 }

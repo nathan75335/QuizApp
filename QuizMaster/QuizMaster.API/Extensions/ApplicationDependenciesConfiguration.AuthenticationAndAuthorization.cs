@@ -9,30 +9,13 @@ namespace QuizMaster.API.Extensions
         public static IServiceCollection AddJwtAuthenticationAndAuthorization
             (this IServiceCollection services)
         {
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromHours(5);
-                options.Cookie.IsEssential = true;
-            })
+            services
             .AddCors(options =>
             {
                 options.AddPolicy("any", opts => opts.AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowAnyOrigin());
-            })
-            .Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            })
-            .AddControllers(options =>
-            {
-                options.RespectBrowserAcceptHeader = true;
-                options.ReturnHttpNotAcceptable = true;
-            }).AddNewtonsoftJson();
-
-            services.AddDistributedMemoryCache();
+            });
 
             return services;
         }

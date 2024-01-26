@@ -2,9 +2,8 @@
 
 namespace QuizMaster.BusinessLogic.Requests;
 
-public class UserQuizRequest
+public class UserQuizFormRequest
 {
-    public int UserId { get; set; }
     public int QuizId { get; set; }
-    public List<QuizQuestion> Answers {  get; set; }
+    public List<QuizQuestion> QuizQuestions { get; set; }
 }

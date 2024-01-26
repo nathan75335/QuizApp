@@ -38,16 +38,8 @@ public class UserQuizRepository : IUserQuizRepository
         return await _context.UserQuizzes.AsNoTracking().FirstOrDefaultAsync(x => x.UserQuizId == id);
     }
 
-    //Have to check this method with Nathan
-    public async Task<UserQuiz> UpdateUserQuizAsync(UserQuiz userQuiz, List<UserAnswer> userAnswers)
+    public async Task<UserQuiz> UpdateUserQuizAsync(UserQuiz userQuiz)
     {
-        //if the userQuiz is the user's current state before updating
-        userQuiz.EndTime = DateTime.Now;
-        // Updating user answers
-        userQuiz.UserAnswers = userAnswers;
-        //calculate score based on the correcct answer
-
-        userQuiz.Score = userQuiz.UserAnswers.Count(answer => answer.AnswerOption.IsCorrect);
         _context.UserQuizzes.Update(userQuiz);
         await _context.SaveChangesAsync();
 

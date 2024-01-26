@@ -31,9 +31,9 @@ public class AnswerOptionService : IAnswerOptionService
         return _mapper.Map<AnswerOptionsDto>(option);
     }
 
-    public async Task<AnswerOptionsDto> DeleteAnswerOptionAsync(AnswerOption optionRequest)
+    public async Task<AnswerOptionsDto> DeleteAnswerOptionAsync(int id)
     {
-        var option = await _answerOptionRepository.GetAnswerOptionByIdAsync(optionRequest.OptionId);
+        var option = await _answerOptionRepository.GetAnswerOptionByIdAsync(id);
         if (option is null)
         {
             _logger.LogError("There is not any option with that id");
@@ -45,6 +45,13 @@ public class AnswerOptionService : IAnswerOptionService
         return _mapper.Map<AnswerOptionsDto>(optionDeleted);
     }
 
+    public async Task<List<AnswerOptionsDto>> GetAllAnswerOptionsAsync()
+    {
+        var options = await _answerOptionRepository .GetAllAnswerOptionsAsync();
+
+        return _mapper.Map<List<AnswerOptionsDto>>(options);
+    }
+
     public async Task<List<AnswerOptionsDto>> GetOptionsByQuestionIdAsync(int questionId)
     {
         var options = await _answerOptionRepository.GetOptionsByQuestionIdAsync(questionId);
@@ -52,9 +59,9 @@ public class AnswerOptionService : IAnswerOptionService
         return _mapper.Map<List<AnswerOptionsDto>>(options);
     }
 
-    public async Task<AnswerOptionsDto> UpdateAnswerOption(AnswerOptionRequest answerOptionRequest)
+    public async Task<AnswerOptionsDto> UpdateAnswerOption(int id, AnswerOptionRequest answerOptionRequest)
     {
-        var option = await _answerOptionRepository.GetAnswerOptionByIdAsync(answerOptionRequest.Id);
+        var option = await _answerOptionRepository.GetAnswerOptionByIdAsync(id);
         if (option is null)
         {
             _logger.LogError("There is no any option to update with that id");

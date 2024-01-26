@@ -31,9 +31,9 @@ public class QuestionService : IQuestionService
         return _mapper.Map<QuestionDto>(question);
     }
 
-    public async Task<QuestionDto> DeleteQuestionAsync(QuestionRequest questionRequest)
+    public async Task<QuestionDto> DeleteQuestionAsync(int id)
     {
-        var question = await _questionRepository.GetQuestionByIdAsync(questionRequest.Id);
+        var question = await _questionRepository.GetQuestionByIdAsync(id);
         if(question is null)
         {
             _logger.LogError("There is not any question to delete with that id");
@@ -71,9 +71,9 @@ public class QuestionService : IQuestionService
         return _mapper.Map<List<QuestionDto>>(questions);
     }
 
-    public async Task<QuestionDto> UpdateQuestionAsync(QuestionRequest questionRequest)
+    public async Task<QuestionDto> UpdateQuestionAsync(int id, QuestionRequest questionRequest)
     {
-        var question = await _questionRepository.GetQuestionByIdAsync(questionRequest.Id);
+        var question = await _questionRepository.GetQuestionByIdAsync(id);
         if(question is null)
         {
             _logger.LogError("There is no any question to update with that id");

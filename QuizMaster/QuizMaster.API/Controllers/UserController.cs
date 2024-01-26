@@ -1,8 +1,8 @@
 ﻿#region
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using QuizMaster.BusinessLogic.Profiles.DTOs;
 using QuizMaster.BusinessLogic.Requests;
 using QuizMaster.BusinessLogic.Services.Interfaces;
@@ -43,7 +43,7 @@ namespace QuizMaster.API.Controllers
 
                 var user = await _userService.UpdateUserAsync(userRegistrationRequest);
 
-                if(user is not null)
+                if (user is not null)
                 {
                     return Ok(new { Message = "User updated successfully" });
                 }
@@ -85,8 +85,8 @@ namespace QuizMaster.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"An error occurred while deleting the user: {ex.Message}", ex);
-                
-               return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Internal Server Error" });
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Internal Server Error" });
             }
         }
 

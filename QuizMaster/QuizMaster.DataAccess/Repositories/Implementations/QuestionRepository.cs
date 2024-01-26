@@ -29,7 +29,10 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task<List<Question>> GetAllQuestionsAsync()
     {
-        return await _context.Questions.AsNoTracking().ToListAsync();
+        return await _context.Questions
+            .Include(q => q.Quiz)
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<Question?> GetQuestionByIdAsync(int id)

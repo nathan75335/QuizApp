@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuizMaster.BusinessLogic.Requests;
 using QuizMaster.BusinessLogic.Services.Interfaces;
 
@@ -12,13 +9,11 @@ namespace QuizMaster.API.Controllers
     public class UserAuthenticationController : ControllerBase
     {
         private readonly IUserService _userService;
-        private IMapper _mapper;
         private ILogger<UserAuthenticationController> _logger;
-        public UserAuthenticationController(IUserService userService, IMapper mapper, 
+        public UserAuthenticationController(IUserService userService,
             ILogger<UserAuthenticationController> logger)
         {
             _userService = userService;
-            _mapper = mapper;
             _logger = logger;
         }
 
@@ -91,9 +86,9 @@ namespace QuizMaster.API.Controllers
                 });
 
                 // return HTTP 200 OK with the token in the response body
-                return Ok(new {Token = token});
+                return Ok(new { Token = token });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occured while processing user login");
 
@@ -114,7 +109,7 @@ namespace QuizMaster.API.Controllers
 
                 return Ok(new { Message = "User succesfully logged out" });
             }
-            catch(Exception ex )
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occured while processing user logout");
 

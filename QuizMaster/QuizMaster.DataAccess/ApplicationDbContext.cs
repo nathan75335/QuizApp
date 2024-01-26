@@ -18,43 +18,14 @@ public class ApplicationDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<AnswerOption> Answers { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<QuizQuestion> QuizQuestions { get; set; }
 
-    //configures the delete behaviors for each relationship
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<UserQuiz>()
-            .HasOne(uq => uq.User)
-            .WithMany(u => u.TakenQuizzes)
-            .HasForeignKey(uq => uq.UserId)
-            .OnDelete(DeleteBehavior.NoAction);
-
         modelBuilder.Entity<UserQuiz>()
             .HasOne(uq => uq.Quiz)
             .WithMany()
             .HasForeignKey(uq => uq.QuizId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<UserAnswer>()
-            .HasOne(ua => ua.UserQuiz)
-            .WithMany(uq => uq.UserAnswers)
-            .HasForeignKey(ua => ua.UserQuizId);
-
-        modelBuilder.Entity<UserAnswer>()
-            .HasOne(ua => ua.Question)
-            .WithMany()
-            .HasForeignKey(ua => ua.QuestionId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<UserAnswer>()
-            .HasOne(ua => ua.AnswerOption)
-            .WithMany()
-            .HasForeignKey(ua => ua.AnswerOptionId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<Question>()
-            .HasOne(q => q.Quiz)
-            .WithMany(qz => qz.Questions)
-            .HasForeignKey(q => q.QuizId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<AnswerOption>()
@@ -63,11 +34,7 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(ao => ao.QuestionId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        modelBuilder.Entity<Quiz>()
-            .HasOne(q => q.Category)
-            .WithMany(c => c.Quizzes)
-            .HasForeignKey(q => q.CategoryId)
-            .OnDelete(DeleteBehavior.NoAction);
+
         modelBuilder.Entity<User>()
             .HasIndex(user => user.Email)
             .IsUnique();

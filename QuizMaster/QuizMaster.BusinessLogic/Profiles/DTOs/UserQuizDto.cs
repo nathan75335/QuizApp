@@ -11,6 +11,4 @@ public class UserQuizDto
     public int QuizId { get; set; }
     public string QuizTitle { get; set; }
     public int Score { get; set; }
-    public DateTime StartTime { get; set; }
-    public DateTime? EndTime { get; set; }
 }

@@ -63,9 +63,10 @@ public class CategoryService : ICategoryService
         return _mapper.Map<CategoryDto>(category);
     }
 
-    public async Task<CategoryDto> UpdateCategoryAsync(CategoryRequest categoryRequest)
+    public async Task<CategoryDto> UpdateCategoryAsync(int id, CategoryRequest categoryRequest)
     {
-        var category = await _categoryRepository.GetCategoryById(categoryRequest.Id);
+        var category = await _categoryRepository.GetCategoryById(id);
+        
         if(category is null)
         {
             _logger.LogError("There is no any category to update with that id");
