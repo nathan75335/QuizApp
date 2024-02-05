@@ -1,4 +1,4 @@
-import '../components/Home.css'
+import '../home/Home.css'
 import { IconName } from "react-icons/fa";
 import { FaHtml5 , FaCss3Alt } from "react-icons/fa6";
 import { MdAccessibility } from "react-icons/md";

@@ -1,5 +1,5 @@
 import { MdAccessibility } from "react-icons/md";
-import '../components/Game.css'
+import '../game/Game.css'
 
 function Game() {
   return (

@@ -1,4 +1,4 @@
-import '../components/Login.css'
+import '../login/Login.css'
 
 function Login({handleActiveClick}){
   return (     

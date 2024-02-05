@@ -1,6 +1,6 @@
-import '../components/Register.css'
-import pic from "../assets/QUIZ.jpg"
-import Login from './Login';
+import '../register/Register.css'
+import pic from "../../assets/QUIZ.jpg"
+import Login from '../login/Login';
 import { useState } from 'react';
 
 function Register(){

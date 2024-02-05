@@ -1,9 +1,9 @@
-import Home from './Home'
-import Game from './Game'
-import Register from './Register';
-import Login from './Login';
+import Home from '../components/home/Home'
+import Game from '../components/game/Game'
+import Register from '../components/register/Register';
 
-export {Home, Game , Register, Login}
+
+export {Home, Game , Register}
 
 
 
