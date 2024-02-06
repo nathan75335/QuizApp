@@ -24,7 +24,7 @@ public class ApplicationDbContext : DbContext
     {
         modelBuilder.Entity<UserQuiz>()
             .HasOne(uq => uq.Quiz)
-            .WithMany()
+            .WithMany(q => q.UserQuizzes)
             .HasForeignKey(uq => uq.QuizId)
             .OnDelete(DeleteBehavior.NoAction);
 

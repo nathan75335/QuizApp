@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizMaster.BusinessLogic.Requests;
-using QuizMaster.BusinessLogic.Services.Implementations;
+using QuizMaster.BusinessLogic.Services.Interfaces;
 
 namespace QuizMaster.API.Controllers
 {
@@ -8,8 +8,8 @@ namespace QuizMaster.API.Controllers
     [ApiController]
     public class AnswerOptionController : ControllerBase
     {
-        private readonly AnswerOptionService _answerOptionService;
-        public AnswerOptionController(AnswerOptionService answerOptionService)
+        private readonly IAnswerOptionService _answerOptionService;
+        public AnswerOptionController(IAnswerOptionService answerOptionService)
         {
             _answerOptionService = answerOptionService;
         }
@@ -18,6 +18,17 @@ namespace QuizMaster.API.Controllers
         public async Task<IActionResult> GetAllOptions()
         {
             var options = await _answerOptionService.GetAllAnswerOptionsAsync();
+
+            return Ok(options);
+        }
+
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetOptionsByQuestionId(int id)
+        {
+            var options = await _answerOptionService.GetOptionsByQuestionIdAsync(id);
 
             return Ok(options);
         }

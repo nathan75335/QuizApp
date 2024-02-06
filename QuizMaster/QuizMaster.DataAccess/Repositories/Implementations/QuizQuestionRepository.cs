@@ -31,7 +31,11 @@ public class QuizQuestionRepository : IQuizQuestionRepository
 
     public async Task<List<QuizQuestion>> GetAllQuizQuestionsAsync()
     {
-        return await _context.QuizQuestions.ToListAsync();
+        return await _context.QuizQuestions
+            .Include(q => q.Question)
+            .Include(ap => ap.AnswerOption)
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<QuizQuestion?> GetQuizQuestionByIdAsync(int id)
@@ -42,7 +46,7 @@ public class QuizQuestionRepository : IQuizQuestionRepository
     public async Task<List<QuizQuestion>> GetQuestionsByQuizIdAsync(int quizId)
     {
         return await _context.QuizQuestions
-                .Include(qq => qq.Question)
+                .Include(qq => qq.AnswerOption)
                 .Where(qq => qq.Question.QuizId == quizId)
                 .ToListAsync();
     }

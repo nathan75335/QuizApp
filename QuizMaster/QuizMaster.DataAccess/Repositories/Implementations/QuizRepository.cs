@@ -29,14 +29,19 @@ public class QuizRepository : IQuizRepository
 
     public async Task<List<Quiz>> GetAllQuizzesAsync()
     {
-        return await _context.Quizzes.AsNoTracking().ToListAsync();
+        return await _context.Quizzes
+            .Include(cr => cr.Creator)
+            .Include(c => c.Category)
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<Quiz?> GetQuizByIdAsync(int quizId)
     {
         return await _context.Quizzes
+            .Include(q => q.Questions)
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.QuizId == quizId);
+            .FirstOrDefaultAsync(x => x.Id == quizId);
     }
 
     public async Task<Quiz> UpdateQuizAsync(Quiz quiz)

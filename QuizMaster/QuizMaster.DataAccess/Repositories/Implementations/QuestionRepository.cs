@@ -38,8 +38,14 @@ public class QuestionRepository : IQuestionRepository
     public async Task<Question?> GetQuestionByIdAsync(int id)
     {
         return await _context.Questions
+            .AsNoTracking().FirstOrDefaultAsync(x => x.QuestionId == id);
+    }
+    public async Task<List<Question>> GetQuestionOptionsByIdAsync(int id)
+    {
+        return await _context.Questions
+            .Include(q => q.Options)
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.QuestionId == id);
+            .ToListAsync();
     }
 
     public async Task<Question> UpdateQuestionAsync(Question question)

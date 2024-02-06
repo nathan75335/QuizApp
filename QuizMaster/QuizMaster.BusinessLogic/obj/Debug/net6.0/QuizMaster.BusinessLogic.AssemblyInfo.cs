@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuizMaster.BusinessLogic")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be8b42e5150d9597af471a8b2f33f1ebc04ade0a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26ac5872651f8f725c24f79d6c5fc926d5bba105")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuizMaster.BusinessLogic")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuizMaster.BusinessLogic")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -9,7 +9,7 @@ namespace QuizMaster.DataAccess.Entities;
 public class Quiz
 {
     [Key]
-    public int QuizId {  get; set; }
+    public int Id {  get; set; }
     public string Title {  get; set; }
 
     [ForeignKey(nameof(Creator))]
@@ -22,4 +22,6 @@ public class Quiz
 
     public List<Question> Questions { get; set; }
     public List<UserQuiz> UserQuizzes { get; set; }
+    public int Score { get; set; }
+    public int TimeLimit { get; set; }
 }

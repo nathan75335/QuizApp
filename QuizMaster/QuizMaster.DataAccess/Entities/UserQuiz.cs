@@ -18,7 +18,5 @@ public class UserQuiz
     [ForeignKey(nameof(Quiz))]
     public int QuizId { get; set; }
     public Quiz Quiz { get; set; }
-    public int Score { get; set; }
-    public int TimeLimit { get; set; }
 
 }

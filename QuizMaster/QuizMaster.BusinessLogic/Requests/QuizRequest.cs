@@ -1,7 +1,4 @@
-﻿using QuizMaster.DataAccess.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace QuizMaster.BusinessLogic.Requests;
+﻿namespace QuizMaster.BusinessLogic.Requests;
 
 public class QuizRequest
 {

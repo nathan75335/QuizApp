@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizMaster.BusinessLogic.Requests;
-using QuizMaster.BusinessLogic.Services.Implementations;
+using QuizMaster.BusinessLogic.Services.Interfaces;
 
 namespace QuizMaster.API.Controllers
 {
@@ -10,16 +10,16 @@ namespace QuizMaster.API.Controllers
     [Authorize(Roles = "Admin, User")]
     public class QuizQuestionController : ControllerBase
     {
-        private readonly QuizQuestionService _quizQuestionService;
-        public QuizQuestionController(QuizQuestionService quizQuestionService)
+        private readonly IQuizQuestionService _quizQuestionService;
+        public QuizQuestionController(IQuizQuestionService quizQuestionService)
         {
             _quizQuestionService = quizQuestionService;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetQuestion(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetAllQuizQuestions()
         {
-            var question = await _quizQuestionService.GetQuestionsByQuizIdAsync(id);
+            var question = await _quizQuestionService.GetAllQuizQuestionsAsync();
 
             return Ok(question);
         }

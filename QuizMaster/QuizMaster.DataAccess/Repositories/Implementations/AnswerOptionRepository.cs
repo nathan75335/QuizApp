@@ -30,12 +30,17 @@ public class AnswerOptionRepository : IAnswerOptionRepository
 
     public async Task<AnswerOption?> GetAnswerOptionByIdAsync(int id)
     {
-        return await _context.Answers.AsNoTracking().FirstOrDefaultAsync(x => x.OptionId == id);
+        return await _context.Answers
+            .Include(q => q.Question)
+            .AsNoTracking().FirstOrDefaultAsync(x => x.OptionId == id);
     }
 
     public async Task<List<AnswerOption>> GetAllAnswerOptionsAsync()
     {
-       return await _context.Answers.AsNoTracking().ToListAsync();
+       return await _context.Answers
+            .Include(q => q.Question)
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<AnswerOption> UpdateAnswerOptionAsync(AnswerOption answerOption)
@@ -46,8 +51,12 @@ public class AnswerOptionRepository : IAnswerOptionRepository
         return answerOption;
     }
 
-    public async Task<AnswerOption?> GetOptionsByQuestionIdAsync(int questionId)
+    public async Task<List<AnswerOption>> GetOptionsByQuestionIdAsync(int questionId)
     {
-        return await _context.Answers.AsNoTracking().FirstOrDefaultAsync(x => x.QuestionId == questionId);
+        return await _context.Answers
+            .Include(q => q.Question)
+            .Where(q => q.QuestionId == questionId)
+            .AsNoTracking()
+            .ToListAsync();
     }
 }

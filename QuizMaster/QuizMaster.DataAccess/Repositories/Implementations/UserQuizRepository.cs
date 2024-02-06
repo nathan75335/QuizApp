@@ -30,7 +30,11 @@ public class UserQuizRepository : IUserQuizRepository
 
     public async Task<List<UserQuiz>> GetAllUserQuizzesAsync()
     {
-        return await _context.UserQuizzes.AsNoTracking().ToListAsync();
+        return await _context.UserQuizzes
+            .Include(u => u.User)
+            .Include(q => q.Quiz)
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<UserQuiz?> GetUserQuizByIdAsync(int id)

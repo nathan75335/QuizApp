@@ -6,7 +6,6 @@ using QuizMaster.BusinessLogic.Profiles.DTOs;
 using QuizMaster.BusinessLogic.Requests;
 using QuizMaster.BusinessLogic.Services.Interfaces;
 using QuizMaster.DataAccess.Entities;
-using QuizMaster.DataAccess.Repositories.Implementations;
 using QuizMaster.DataAccess.Repositories.Interfaces;
 #endregion
 namespace QuizMaster.BusinessLogic.Services.Implementations;
@@ -14,21 +13,25 @@ namespace QuizMaster.BusinessLogic.Services.Implementations;
 public class UserQuizService : IUserQuizService
 {
     private readonly IUserQuizRepository _userQuizRepository;
+    private readonly IQuizRepository _quizRepository;
     private readonly IMapper _mapper;
     private readonly ILogger<UserQuizService> _logger;
-
-    public UserQuizService(IUserQuizRepository userQuizRepository, IMapper mapper, ILogger<UserQuizService> logger)
+    private readonly IAnswerOptionRepository _answerOptionRepository;
+    public UserQuizService(IUserQuizRepository userQuizRepository, IMapper mapper,
+        ILogger<UserQuizService> logger, IAnswerOptionRepository answerOptionRepository, IQuizRepository quizRepository)
     {
         _userQuizRepository = userQuizRepository;
         _mapper = mapper;
         _logger = logger;
+        _answerOptionRepository = answerOptionRepository;
+        _quizRepository = quizRepository;
     }
 
     public async Task<UserQuizDto> AddUserQuizAsync(UserQuizRequest userQuizRequest)
     {
         var userQuiz = await _userQuizRepository.AddUserQuizAsync(_mapper.Map<UserQuiz>(userQuizRequest));
-        var score = await CalculateScore(userQuizRequest.QuizId, userQuizRequest.UserId, userQuizRequest.Answers);
-        userQuiz.Score = score;
+        //var score = await CalculateScore(userQuizRequest.QuizId, userQuizRequest.UserId, userQuizRequest.Answers);
+        //userQuiz.Score = score;
         return _mapper.Map<UserQuizDto>(userQuiz);
     }
 
@@ -56,7 +59,7 @@ public class UserQuizService : IUserQuizService
     public async Task<UserQuizDto> GetUserQuizByIdAsync(int id)
     {
         var userQuiz = await _userQuizRepository.GetUserQuizByIdAsync(id);
-        if(userQuiz is null)
+        if (userQuiz is null)
         {
             _logger.LogError("There is no any user with that id");
             throw new NotFoundException("There is not any user with such an id");
@@ -78,9 +81,9 @@ public class UserQuizService : IUserQuizService
         return _mapper.Map<UserQuizDto>(updatedUserQuiz);
     }
 
-    private async Task<int> CalculateScore(int quizId, int userId, List<QuizQuestion> userAnswers)
+    public async Task<int> CalculateScoreAsync(UserQuizFormRequest userQuizFormRequest)
     {
-        var quiz = await _userQuizRepository.GetUserQuizByIdAsync(quizId);
+        var quiz = await _quizRepository.GetQuizByIdAsync(userQuizFormRequest.QuizId);
         if (quiz == null)
         {
             _logger.LogError("There is no any quiz with that id");
@@ -88,16 +91,12 @@ public class UserQuizService : IUserQuizService
         }
 
         var totalScore = 0;
-        foreach (var userAnswer in userAnswers)
+        foreach (var userAnswer in userQuizFormRequest.QuizQuestions)
         {
-            var question = quiz.Quiz.Questions.FirstOrDefault(q => q.QuestionId == userAnswer.QuestionId);
-            if (question != null)
+            var answer = await _answerOptionRepository.GetAnswerOptionByIdAsync(userAnswer.AnswerId);
+            if (answer.QuestionId == userAnswer.QuestionId)
             {
-                var correctOption = question.Options.FirstOrDefault(opt => opt.IsCorrect);
-                if (correctOption != null && correctOption.OptionId == userAnswer.AnswerOptionId)
-                {
-                    totalScore += question.Point;
-                }
+                totalScore += answer.Question.Point;
             }
         }
 

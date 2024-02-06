@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizMaster.BusinessLogic.Requests;
 using QuizMaster.BusinessLogic.Services.Interfaces;
@@ -8,7 +7,7 @@ namespace QuizMaster.API.Controllers
 {
     [Route("api/categories")]
     [ApiController]
-    [Authorize(Roles ="Admin, User")]
+    [Authorize(Roles = "Admin, User")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

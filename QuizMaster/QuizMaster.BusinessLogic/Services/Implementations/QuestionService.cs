@@ -57,6 +57,12 @@ public class QuestionService : IQuestionService
         return _mapper.Map<QuestionDto>(question);
     }
 
+    public async Task<List<QuestionDto>> GetQuestionOptionsByIdAsync(int id)
+    {
+        var options = await _questionRepository.GetQuestionOptionsByIdAsync(id);
+
+        return _mapper.Map<List<QuestionDto>>(options);
+    }
     public async Task<List<QuestionDto>> GetQuestionsByQuizAsync(int quizId)
     {
         var questions = await _questionRepository.GetQuestionByIdAsync(quizId);

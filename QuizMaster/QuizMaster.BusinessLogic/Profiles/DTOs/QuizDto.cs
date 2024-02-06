@@ -8,4 +8,6 @@ public class QuizDto
     public string UserName { get; set; } = string.Empty;
     public int CategoryId { get; set; }
     public string CategoryName { get; set; } = string.Empty;
+    public List<QuestionDto> Questions { get; set; }
+
 }

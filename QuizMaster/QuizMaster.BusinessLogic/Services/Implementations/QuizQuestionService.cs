@@ -44,6 +44,12 @@ public class QuizQuestionService : IQuizQuestionService
         return _mapper.Map<QuizQuestionDto>(quizDeleted);
     }
 
+    public async Task<List<QuizQuestionDto>> GetAllQuizQuestionsAsync()
+    {
+        var quizQuestions = await _quizQuestionRepository.GetAllQuizQuestionsAsync();
+
+        return _mapper.Map<List<QuizQuestionDto>>(quizQuestions);
+    }
     public async Task<List<QuizQuestionDto>> GetQuestionsByQuizIdAsync(int quizId)
     {
         var questions = await _quizQuestionRepository.GetQuestionsByQuizIdAsync(quizId);

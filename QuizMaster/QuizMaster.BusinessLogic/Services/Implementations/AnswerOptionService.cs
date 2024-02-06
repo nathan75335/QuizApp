@@ -47,7 +47,7 @@ public class AnswerOptionService : IAnswerOptionService
 
     public async Task<List<AnswerOptionsDto>> GetAllAnswerOptionsAsync()
     {
-        var options = await _answerOptionRepository .GetAllAnswerOptionsAsync();
+        var options = await _answerOptionRepository.GetAllAnswerOptionsAsync();
 
         return _mapper.Map<List<AnswerOptionsDto>>(options);
     }

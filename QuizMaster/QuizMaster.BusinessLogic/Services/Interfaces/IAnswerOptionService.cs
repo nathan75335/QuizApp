@@ -1,6 +1,5 @@
 ﻿using QuizMaster.BusinessLogic.Profiles.DTOs;
 using QuizMaster.BusinessLogic.Requests;
-using QuizMaster.DataAccess.Entities;
 
 namespace QuizMaster.BusinessLogic.Services.Interfaces;
 

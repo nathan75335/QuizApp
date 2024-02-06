@@ -2,7 +2,7 @@
 
 public class AnswerOptionsDto
 {
-    public int AnswerOptionId { get; set; }
+    public int OptionId { get; set; }
     public string OptionText {  get; set; }
     public bool IsCorrect {  get; set; }
     public int QuestionId { get; set; }

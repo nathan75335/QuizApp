@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuizMaster.BusinessLogic.Requests;
 using QuizMaster.BusinessLogic.Services.Interfaces;
@@ -21,8 +20,8 @@ namespace QuizMaster.API.Controllers
         public async Task<IActionResult> GetAllQuestions()
         {
             var questions = await _questionService.GetAllQuestionsAsync();
-            
-            return Ok(await _questionService.GetAllQuestionsAsync());
+
+            return Ok(questions);
         }
 
         [HttpPost]
@@ -54,7 +53,7 @@ namespace QuizMaster.API.Controllers
         public async Task<IActionResult> DeleteQuestion(int id)
         {
             var question = await _questionService.DeleteQuestionAsync(id);
-            
+
             return Ok(question);
         }
     }

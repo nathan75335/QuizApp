@@ -30,7 +30,7 @@ public class UserRepository : IUserRepository
 
     public async Task<List<User>> GetAllUsersAsync()
     {
-        return await _context.Users.ToListAsync();
+        return await _context.Users.Include(r => r.Role).ToListAsync();
     }
 
     public async Task<User?> GetUserByEmailAsync(string email)

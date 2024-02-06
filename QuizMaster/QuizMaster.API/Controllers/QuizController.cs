@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizMaster.BusinessLogic.Requests;
-using QuizMaster.BusinessLogic.Services.Implementations;
+//using QuizMaster.BusinessLogic.Services.Implementations;
+using QuizMaster.BusinessLogic.Services.Interfaces;
 
 namespace QuizMaster.API.Controllers
 {
@@ -10,8 +11,8 @@ namespace QuizMaster.API.Controllers
     [Authorize(Roles = "Admin, User")]
     public class QuizController : ControllerBase
     {
-        private readonly QuizService _quizService;
-        public QuizController(QuizService quizService)
+        private readonly IQuizService _quizService;
+        public QuizController(IQuizService quizService)
         {
             _quizService = quizService;
         }
@@ -22,6 +23,17 @@ namespace QuizMaster.API.Controllers
             var quizzes = await _quizService.GetAllQuizzesAsync();
 
             return Ok(quizzes);
+        }
+
+        [HttpGet("{id:int})")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetQuizById(int id)
+        {
+            var quiz = await _quizService.GetQuizByIdAsync(id);
+
+            return Ok(quiz);
         }
 
         [HttpPost]
