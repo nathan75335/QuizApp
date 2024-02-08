@@ -44,6 +44,15 @@ public class QuizRepository : IQuizRepository
             .FirstOrDefaultAsync(x => x.Id == quizId);
     }
 
+    public async Task<List<Quiz>> GetQuizByCategoryIdAsync(int categoryId) 
+    { 
+        return await _context.Quizzes
+            .Include(x => x.Questions)
+            .Include(x => x.Category)
+            .Where(x => x.CategoryId == categoryId)
+            .ToListAsync();
+    }
+
     public async Task<Quiz> UpdateQuizAsync(Quiz quiz)
     {
         _context.Quizzes.Update(quiz);

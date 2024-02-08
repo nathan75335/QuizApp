@@ -30,6 +30,8 @@ public class ApplicationProfile : Profile
             .ReverseMap();
 
         CreateMap<Question, QuestionDto>()
+            .ForMember(dest => dest.answerOptions, opt =>
+                opt.MapFrom(src => src.Options))
             .ReverseMap();
 
         //Mapping configuration for Quiz

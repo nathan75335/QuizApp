@@ -25,6 +25,17 @@ namespace QuizMaster.API.Controllers
             return Ok(categories);
         }
 
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetCategoryByQuizId(int id)
+        {
+            var categoryQuiz = await _categoryService.GetCategoryByQuizIdAsync(id);
+
+            return Ok(categoryQuiz);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

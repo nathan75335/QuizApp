@@ -63,6 +63,13 @@ public class CategoryService : ICategoryService
         return _mapper.Map<CategoryDto>(category);
     }
 
+    public async Task<List<CategoryDto>> GetCategoryByQuizIdAsync(int id)
+    {
+        var categoryQuizzes = await _categoryRepository.GetCategoryByQuizIdAsync(id);
+
+        return _mapper.Map<List<CategoryDto>> (categoryQuizzes);
+    }
+
     public async Task<CategoryDto> UpdateCategoryAsync(int id, CategoryRequest categoryRequest)
     {
         var category = await _categoryRepository.GetCategoryById(id);

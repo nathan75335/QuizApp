@@ -43,6 +43,7 @@ public class QuestionRepository : IQuestionRepository
     public async Task<List<Question>> GetQuestionOptionsByIdAsync(int id)
     {
         return await _context.Questions
+            .Include(qz => qz.Quiz)
             .Include(q => q.Options)
             .AsNoTracking()
             .ToListAsync();

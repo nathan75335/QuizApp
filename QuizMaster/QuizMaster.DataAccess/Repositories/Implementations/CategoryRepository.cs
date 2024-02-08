@@ -40,6 +40,14 @@ public class CategoryRepository : ICategoryRepository
             .FirstOrDefaultAsync(x => x.CategoryId == categoryId);
     }
 
+    public async Task<List<Category>> GetCategoryByQuizIdAsync(int quizId)
+    {
+        return await _context.Categories
+            .Include(q => q.Quizzes)
+            //.Where(q => q.CategoryId == quizId)
+            .ToListAsync();
+    }
+
     public async Task<Category> UpdateCategoryAsync(Category category)
     {
         _context.Categories.Update(category);

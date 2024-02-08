@@ -52,6 +52,13 @@ public class QuizService : IQuizService
         return _mapper.Map<List<QuizDto>>(quizzes);
     }
 
+    public async Task<List<QuizDto>> GetQuizByCategoryIdAsync(int categoryId)
+    {
+        var quizCategories = await _quizRepository.GetQuizByCategoryIdAsync(categoryId);
+
+        return _mapper.Map<List<QuizDto>>(quizCategories);
+    }
+
     public async Task<QuizDto> GetQuizByIdAsync(int quizId)
     {
         var quiz = await _quizRepository.GetQuizByIdAsync(quizId);

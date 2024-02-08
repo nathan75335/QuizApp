@@ -6,6 +6,7 @@ public interface ICategoryRepository
 {
     Task<Category?> GetCategoryById(int categoryId);
     Task<List<Category>> GetAllCategoriesAsync();
+    Task<List<Category>> GetCategoryByQuizIdAsync(int quizId);
     Task<Category> AddCategoryAsync(Category category);
     Task<Category> UpdateCategoryAsync(Category category);
     Task<Category> DeleteCategoryAsync(Category category);
