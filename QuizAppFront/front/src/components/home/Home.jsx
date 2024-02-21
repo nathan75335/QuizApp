@@ -1,12 +1,39 @@
 import '../home/Home.css'
-import { IconName } from "react-icons/fa";
-import { FaHtml5 , FaCss3Alt } from "react-icons/fa6";
-import { MdAccessibility } from "react-icons/md";
-import { IoLogoJavascript } from "react-icons/io5";
-
+import { FaHtml5 } from "react-icons/fa6";
+import { useEffect, useState } from 'react';
 
 
 function Home() {
+
+  const [categories, setCategories] = useState([])
+
+
+  async function getCategories (){
+
+    //console.log(JSON.parse(localStorage.getItem('token')))
+    const  response = await fetch('https://localhost:7005/api/categories', {
+      
+      method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": ' Bearer ' +  JSON.parse(localStorage.getItem('token')).token, 
+        },
+    });
+
+    const categories = await response.json();
+    setCategories([...categories])
+  } 
+
+
+  useEffect( () => {
+    getCategories()
+   //let rep = JSON.parse(localStorage.getItem('token'))
+
+  },[] )
+
+
+  
+
   return (
     <section className='container'>
 
@@ -15,15 +42,18 @@ function Home() {
             <h1 >Frontend Quizz!</h1>
             <p  className='chose_subject'>pick a subject to get started.</p>
         </div>
-
         <div className="answers_section">
-            <a href="#" className="categorie link"><span  className='icon '> <FaHtml5 /></span> HTML</a>
-            <a  href="#"className="categorie link"> <span  className='icon '><FaCss3Alt /></span> CSS </a>
-            <a  href="#"className="categorie link"><span  className='icon '> <IoLogoJavascript /></span>  Javascript </a>
-            <a href="#" className="categorie link"><span  className='icon '> <MdAccessibility /></span>  Accessibility</a>     
-        </div>
+
+        {categories.map( categorie  => (
+                <a  href={`/QuizzesByCategory/${categorie.categoryId}`} className="categorie link" key={categorie.categoriyId} >
+                  <span  className='icon '> <FaHtml5 /></span>{categorie.name}</a> 
+        ))
+      }
+       </div>
+       
     </section>
   );
 }
 
 export default Home;
+

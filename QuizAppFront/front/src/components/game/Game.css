@@ -18,6 +18,10 @@
 
     }
 
+    .hide_game-container{
+      display: none;
+    }
+
 .button_3 {
   appearance: none;
   background-color: #933DC9;
@@ -53,13 +57,14 @@
  background-color: #933DC9;
  color: #fff;
 }
-.icon{
+.icon-quizz{
  padding: 4px;
   width: 30px;
   height: 30px;
   border-radius: 5px;
-  background-color: #933DC9;
+  background-color:#933DC9;
   margin-right: 7px;
+  color: black;
 }
 .icon_2{
   width: 24px;
@@ -72,7 +77,7 @@
   align-items: center;
   justify-content: center;
 }
-h3{
+h2{
   margin-bottom: 40px;
 }
 .answer{
@@ -90,7 +95,7 @@ align-self: end;
 }
 .quiz_section{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 @media only screen and (max-width: 500px) {
