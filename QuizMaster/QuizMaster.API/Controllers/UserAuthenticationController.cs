@@ -23,18 +23,10 @@ namespace QuizMaster.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest userRegistrationRequest)
         {
-            try
-            {
                 await _userService.AddUserAsync(userRegistrationRequest);
 
                 return Ok(userRegistrationRequest);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An Error occured while processing user registration");
-
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured while processing the request");
-            }
+           
         }
 
         /// <summary>
@@ -62,38 +54,13 @@ namespace QuizMaster.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> LogIn([FromBody] UserLoginRequest userLoginRequest)
         {
-            try
-            {
+           
                 //attempt user authentication and get the authentication token
                 var token = await _userService.LoginAsync(userLoginRequest);
 
-                //if authentication fails, return Unauthorized response
-                if (token is null)
-                {
-                    return Unauthorized("Invalid UserName or Password");
-                }
-
-                //Here i'm setting a secure cookie with the authentication token
-                Response.Cookies.Append("token", token, new CookieOptions
-                {
-                    MaxAge = TimeSpan.FromHours(6),
-                    //makes the cookie accessible only trough HTTP
-                    HttpOnly = true,
-                    //Protect against CSRF(Cross-site request forgery) attacks
-                    SameSite = SameSiteMode.Strict,
-                    //Send the cookie only over HTTPS in production
-                    Secure = true
-                });
-
                 // return HTTP 200 OK with the token in the response body
                 return Ok(new { Token = token });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occured while processing user login");
-
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured while processing the request");
-            }
+          
 
         }
 

@@ -24,11 +24,12 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
-
-app.UseCors("any");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
+app.UseCors("any");
+
 await app.Configure();
+
 app.UseAuthorization();
 
 app.MapControllers();

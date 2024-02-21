@@ -94,7 +94,7 @@ public class UserQuizService : IUserQuizService
         foreach (var userAnswer in userQuizFormRequest.QuizQuestions)
         {
             var answer = await _answerOptionRepository.GetAnswerOptionByIdAsync(userAnswer.AnswerId);
-            if (answer.QuestionId == userAnswer.QuestionId)
+            if (answer.QuestionId == userAnswer.QuestionId && answer.IsCorrect)
             {
                 totalScore += answer.Question.Point;
             }

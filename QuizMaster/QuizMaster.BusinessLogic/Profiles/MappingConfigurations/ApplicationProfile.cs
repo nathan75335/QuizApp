@@ -12,7 +12,7 @@ public class ApplicationProfile : Profile
         //User mappingConfiguration
         CreateMap<UserRegistrationRequest, User>()
             .ForMember(dest => dest.UserName,
-                options => options.MapFrom(source => source.Name));
+                options => options.MapFrom(source => source.Name)).ReverseMap();
 
         CreateMap<User, UserDto>()
             .ReverseMap();

@@ -14,7 +14,7 @@ namespace QuizMaster.API.Middlewares
 
         private async Task HandleException(HttpContext context, Exception ex, int statusCode)
         {
-            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            context.Response.StatusCode = statusCode;
             await context.Response.WriteAsJsonAsync(new Error()
             {
                 Message = ex.Message,
