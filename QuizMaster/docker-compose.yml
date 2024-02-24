@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   quizmaster.api:
+    container_name: quizzapp
     image: ${DOCKER_REGISTRY-}quizmasterapi
     build:
       context: .
