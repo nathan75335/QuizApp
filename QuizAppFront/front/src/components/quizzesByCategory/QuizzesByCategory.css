@@ -34,3 +34,20 @@ h3{
 font-style: italic;
 opacity: 0.8;
 }
+
+
+@media only screen and (max-width: 375px) {
+
+    .quizz{
+        width: 100%;
+        margin:0;
+        margin-bottom: 10px;
+       
+    }
+   
+    .categoryQuizzes-container{
+        margin: 20px auto; 
+      
+    }
+  
+}

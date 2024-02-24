@@ -2,13 +2,13 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 450px;
-    min-height: 429px;
+    min-width: 150px;
+    min-height: 129px;
     background-color: #fff;
     color: #933DC9;
     font-weight: 700;
     position: absolute;
-    top:11%;
+    top:20%;
     left: 33%;
     z-index: 100;
     font-size: 20px;
@@ -17,5 +17,21 @@
 .button-container{
     width: 260px;
     display: flex;
+    padding: 13px;
     justify-content: space-between;
+}
+@media only screen and (max-width: 375px) {
+    .result-container{
+      
+        top:25%;
+        left: 10%;
+       
+    }
+
+    .button-container{
+      
+        padding: 13px;
+       
+    }
+   
 }

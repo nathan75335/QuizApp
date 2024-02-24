@@ -32,7 +32,7 @@ function QuizzesByCategory(){
         
         {quizzesByCategory.map( category => (
             <>
-                <h2>{category.name}</h2>
+                <h2 className='categorie-title'>{category.name}</h2>
               
                 <div className='quizz-container'>
                     {category.quizzes.map(quizz => (

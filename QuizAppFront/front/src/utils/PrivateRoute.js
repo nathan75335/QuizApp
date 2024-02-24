@@ -1,9 +1,15 @@
-import {Navigate , Outlet} from "react-router-dom";
+import {Navigate ,  Outlet} from "react-router-dom";
+
 
 //Protected Routes with React Router v6
 function PrivateRoutes(){
-    let auth = {'token': false} 
+
+    //let aut = { 'tok': true}
+    let auth = JSON.parse(localStorage.getItem('token'))
+
     return(
-        auth.token ? <Outlet/> : <Navigate to="/"/>
+        auth? auth.token? <Outlet/> : <Navigate to="/" /> : <Navigate to="/" />
     )
 }
+
+export default PrivateRoutes

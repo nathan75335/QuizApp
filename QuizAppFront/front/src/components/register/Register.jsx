@@ -27,7 +27,7 @@ function Register(){
       body: JSON.stringify( {name: name, email: email, password: password, confirmPassWord: confirmPassWord} )
     });
 
-    if(response.status == 200){
+    if(response.status === 200){
       setIsregistred(true)
     }
 

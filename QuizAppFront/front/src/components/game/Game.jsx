@@ -1,7 +1,7 @@
 import { MdSports } from "react-icons/md";
 import '../game/Game.css';
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import quizQuestions from "./quizQuestions";
 import ModelResultScreen from '../modalResultScreen/ModalResultScreen'
 
@@ -15,7 +15,10 @@ function Game() {
     let [questionIndex , setQuestionIndex] = useState(0);
     let [isTimeOut, setIsTimeout] = useState(false)
     let [isResult , SetIsresult] = useState(false)
+    let [currentlyChecked, setCurrentlyChecked] = useState(0);
 
+    let alphabet=['A', 'B', 'C', 'D'];
+   
     const [seconds, setSeconds] = useState(10)
     const [minutes, setMinutes] = useState(2)
     let [score, setScore] = useState(0); 
@@ -52,25 +55,24 @@ function Game() {
    
     },[isTimeOut])
 
-  useEffect(()=> {
+useEffect(()=> {
+    timer = setInterval(()=>{
 
-      timer = setInterval(()=>{
-
-        if(minutes === 0 && seconds === 0 ){
-           clearInterval(timer)
-           setIsTimeout(true)
-           return 
-         
+      if(minutes === 0 && seconds === 0 ){
+          clearInterval(timer)
+          setIsTimeout(true)
+          return 
+        
+    }
+      setSeconds(seconds - 1)
+      if(seconds === 0){
+        setMinutes(minutes - 1)
+        setSeconds(59)
       }
-        setSeconds(seconds - 1)
-        if(seconds === 0){
-          setMinutes(minutes - 1)
-          setSeconds(59)
-        }
-      }, 1000)
+    }, 1000)
 
-      return () => clearInterval(timer)
-    },[minutes, seconds]) 
+    return () => clearInterval(timer)
+  },[minutes, seconds])
 
   async function getQuestionsByQuiz (){
 
@@ -128,6 +130,11 @@ function Game() {
   
       
   }
+  console.log('ggfgfg')
+
+  const handleActiveOption = (id)=> {
+    setCurrentlyChecked(id);
+  }
 
   //select all user answer and corresponding questions from the front 
  function getUserAnswer(questionId, userOptionId){
@@ -145,7 +152,7 @@ function Game() {
      
         <div className="game-header">
             <h2><span className="icon-quizz"><MdSports/></span>{questions[questionIndex].quizTitle}</h2>
-            <p className="time">{minutes}:{seconds}</p>
+            {/*<p className="time">{minutes}:{seconds}</p>*/}
         </div>
       
 
@@ -159,10 +166,10 @@ function Game() {
                
                 <div className="">
                 {
-                  questions[questionIndex] ?  questions[questionIndex].answerOptions ? questions[questionIndex].answerOptions.map( answerOption => (
+                  questions[questionIndex] ?  questions[questionIndex].answerOptions ? questions[questionIndex].answerOptions.map( (answerOption, index) => (
                     <p className="answer" key={answerOption.optionId}>
-                      <span className="icon_2"> A</span> {answerOption.optionText} 
-                      <span className="check"> <input  onChange={()=> getUserAnswer( questions[questionIndex].questionId ,answerOption.optionId)}type='checkbox'/></span></p>
+                      <span className="icon_2">{alphabet[index]}</span> {answerOption.optionText} 
+                      <span className="check"> <input checked = {currentlyChecked === answerOption.optionId ? true: false} onClick={() => handleActiveOption(answerOption.optionId)} onChange={()=> getUserAnswer( questions[questionIndex].questionId ,answerOption.optionId)} type='checkbox'/></span></p>
                   ))  :  "Loading..." : "Loading..."
                 }
                 </div>

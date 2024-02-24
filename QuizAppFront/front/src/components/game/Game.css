@@ -110,6 +110,13 @@ align-self: end;
   .app_container{
     margin: 5px auto;
   }
+  h2{
+    font-size: 16px;
+  }
+  .quiz_section{
+    font-weight: bold;
+    font-size: 15px;
+}
 
 
 }
