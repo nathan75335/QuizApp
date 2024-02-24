@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("30112fba-7b11-4f45-89ef-de167d0eaaca")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuizMaster.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4be9603feca45448458da6c449bc7b9df65753a1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuizMaster.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuizMaster.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

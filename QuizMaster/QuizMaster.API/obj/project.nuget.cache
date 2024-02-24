@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wdzU6NbDMJSGcgGoqCrFijPrCk8WZ+gU7OL8b0qVDljf8+1mm/xNVJv9VlmeULD/Md50OHeqM75j3KhVXYDYOg==",
+  "dgSpecHash": "B3JB8y8kDZD7bbHu9JK9sMlkF2skccrtB2u81Z9lEDV8GZVjd5pEgIHVlvuwBLc5QuaKCgS7U0enuKekReMqqw==",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Desktop\\QuizApp\\QuizMaster\\QuizMaster.API\\QuizMaster.API.csproj",
   "expectedPackageFiles": [
@@ -53,6 +53,7 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
