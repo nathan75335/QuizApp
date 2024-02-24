@@ -79,7 +79,7 @@ function Register(){
                                 type="password" placeholder="Confirm Password"
                               />
 
-                              <button onClick={async() => await handleSubmit}>Create</button>
+                              <button onClick={async() => await handleSubmit()}>Create</button>
                               
                               <p className="message">Already registered? <a href="#"
                                onClick={ ()=> setActive(false)
