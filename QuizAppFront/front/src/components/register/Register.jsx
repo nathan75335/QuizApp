@@ -29,6 +29,8 @@ function Register(){
 
     if(response.status === 200){
       setIsregistred(true)
+    }else{
+      console.log(response)
     }
 
      return await response.json();
@@ -36,8 +38,8 @@ function Register(){
 
    
 
- function handleSubmit() {
-  registerUser()
+ async function handleSubmit() {
+  await registerUser()
  }
   
   return (
@@ -77,7 +79,7 @@ function Register(){
                                 type="password" placeholder="Confirm Password"
                               />
 
-                              <button onClick={handleSubmit}>Create</button>
+                              <button onClick={async() => await handleSubmit}>Create</button>
                               
                               <p className="message">Already registered? <a href="#"
                                onClick={ ()=> setActive(false)
