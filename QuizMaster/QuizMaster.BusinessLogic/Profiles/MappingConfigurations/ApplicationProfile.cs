@@ -27,6 +27,8 @@ public class ApplicationProfile : Profile
 
         //Mapping configuration for Question
         CreateMap<QuestionRequest, Question>()
+            .ForMember(dest => dest.QuestionTitle, opt => 
+                opt.MapFrom(src => src.Question))
             .ReverseMap();
 
         CreateMap<Question, QuestionDto>()
