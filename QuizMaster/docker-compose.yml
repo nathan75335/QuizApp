@@ -11,7 +11,7 @@ services:
     ports:
       - 8080:80 
     environment:
-      - CONNECTIONSTRINGS__IDENTITYSERVICE=Server=sql_server_identity;Database=IdentityService;User=sa;Password=Nathan_musoko123;Encrypt=false;
+      - CONNECTIONSTRINGS__QUIZMASTERCONNECTION=Server=sql_server_identity;Database=QuizzDatabase;User=sa;Password=Nathan_musoko123;Encrypt=false;
       - ASPNETCORE_ENVIRONMENT=Development
 
   sql_server_identity:
