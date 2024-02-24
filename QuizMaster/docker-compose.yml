@@ -27,15 +27,15 @@ services:
         source: data
         target: /var/opt/mssql
 
-  front:
-    image: front
-    build:
-      context: ../QuizAppFront/front
-      dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
-    ports:
-      - 3000:3000
+  # front:
+  #   image: front
+  #   build:
+  #     context: ../QuizAppFront/front
+  #     dockerfile: ./Dockerfile
+  #   environment:
+  #     NODE_ENV: production
+  #   ports:
+  #     - 3000:3000
 
 volumes:
   data:
