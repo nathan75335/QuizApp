@@ -112,7 +112,7 @@ useEffect(()=> {
      }
 
        //send user answers to the backend to calculate score
-       let  response = await fetch(`http://quizmaster.api/api/userquizzes/calculate`, {
+       let  response = await fetch(`http://quizzapp/api/userquizzes/calculate`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
