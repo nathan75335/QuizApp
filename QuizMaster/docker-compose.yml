@@ -14,6 +14,8 @@ services:
     environment:
       - CONNECTIONSTRINGS__QUIZMASTERCONNECTION=Server=sql_server_identity;Database=QuizzDatabase;User=sa;Password=Nathan_musoko123;Encrypt=false;
       - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - quiz_network
 
   sql_server_identity:
     image: "mcr.microsoft.com/mssql/server:2019-latest"
@@ -26,7 +28,8 @@ services:
       - type: volume
         source: data
         target: /var/opt/mssql
-
+    networks:
+      - quiz_network
   front:
      image: front
      build:
@@ -38,5 +41,13 @@ services:
        - 3000:3000
      depends_on:
       - quizzapp
+     networks:
+      - quiz_network
+
 volumes:
   data:
+
+
+networks:
+  quiz_network: 
+    driver: bridge  
