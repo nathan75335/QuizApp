@@ -17,18 +17,18 @@ builder.ConfigureServices()
 var app = builder.Build();
 
 
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 // Configure the HTTP request pipeline.
-
-app.UseCors("any");
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
+app.UseCors("any");
+
 await app.Configure();
+
 app.UseAuthorization();
 
 app.MapControllers();

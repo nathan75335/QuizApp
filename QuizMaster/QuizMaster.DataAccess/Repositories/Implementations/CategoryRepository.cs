@@ -44,7 +44,7 @@ public class CategoryRepository : ICategoryRepository
     {
         return await _context.Categories
             .Include(q => q.Quizzes)
-            //.Where(q => q.CategoryId == quizId)
+            .Where(q => q.CategoryId == quizId)
             .ToListAsync();
     }
 
