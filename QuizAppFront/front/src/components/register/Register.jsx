@@ -19,7 +19,7 @@ function Register(){
 
 
   async function  registerUser(){
-    let  response = await fetch(`http://quizzapp:80/api/auth/registration`, {
+    let  response = await fetch(`http://quizzapp/api/auth/registration`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
