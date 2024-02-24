@@ -1,0 +1,22 @@
+.result-container{
+    display: flex;
+   
+    align-items: center;
+    flex-direction: column;
+    width: 450px;
+    min-height: 200px;
+    background-color: #fff;
+    color: #933DC9;
+    font-weight: 700;
+    position: absolute;
+    top:20%;
+    left: 33%;
+    z-index: 100;
+    font-size: 20px;
+
+}
+.button-container{
+    width: 260px;
+    display: flex;
+    justify-content: space-between;
+}
