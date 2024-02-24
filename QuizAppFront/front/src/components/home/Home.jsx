@@ -11,7 +11,7 @@ function Home() {
   async function getCategories (){
 
     //console.log(JSON.parse(localStorage.getItem('token')))
-    const  response = await fetch('https://localhost:7005/api/categories', {
+    const  response = await fetch('http://quizmaster.api/api/categories', {
       
       method: 'GET',
         headers: {

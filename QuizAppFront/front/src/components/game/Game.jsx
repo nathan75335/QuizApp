@@ -76,7 +76,7 @@ useEffect(()=> {
 
   async function getQuestionsByQuiz (){
 
-    let  response = await fetch(`https://localhost:7005/api/questions/${id}`, {
+    let  response = await fetch(`http://quizmaster.api/api/questions/${id}`, {
 
        method: 'GET',
         headers: {
@@ -112,7 +112,7 @@ useEffect(()=> {
      }
 
        //send user answers to the backend to calculate score
-       let  response = await fetch(`https://localhost:7005/api/userquizzes/calculate`, {
+       let  response = await fetch(`http://quizmaster.api/api/userquizzes/calculate`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

@@ -9,7 +9,7 @@ function QuizzesByCategory(){
 
   async function getQuizzesByCategory (){
 
-    const  response = await fetch(`https://localhost:7005/api/categories/${id}`, {
+    const  response = await fetch(`http://quizmaster.api/api/categories/${id}`, {
         method: 'GET',
         headers: {
           "Content-Type": "application/json",

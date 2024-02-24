@@ -12,7 +12,7 @@ const [password, setPassword] = useState('')
 
   async function  login(){
 
-    const response = await fetch(`http://localhost:5270/api/auth/login`, {
+    const response = await fetch(`http://quizmaster.api/api/auth/login`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"

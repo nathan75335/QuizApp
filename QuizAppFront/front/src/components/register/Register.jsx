@@ -19,7 +19,7 @@ function Register(){
 
 
   async function  registerUser(){
-    let  response = await fetch(`https://localhost:7005/api/auth/registration`, {
+    let  response = await fetch(`http://quizmaster.api/api/auth/registration`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
