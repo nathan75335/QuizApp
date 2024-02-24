@@ -28,7 +28,7 @@ function Game() {
 //get score for the selected questions after the time is finished 
  async function  getScore(){
 
-    let  response = await fetch(`https://localhost:7005/api/userquizzes/calculate`, {
+    let  response = await fetch(`http://40.71.42.59:8080/api/userquizzes/calculate`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ useEffect(()=> {
 
   async function getQuestionsByQuiz (){
 
-    let  response = await fetch(`http://quizmaster.api/api/questions/${id}`, {
+    let  response = await fetch(`http://40.71.42.59:8080/api/questions/${id}`, {
 
        method: 'GET',
         headers: {
@@ -112,7 +112,7 @@ useEffect(()=> {
      }
 
        //send user answers to the backend to calculate score
-       let  response = await fetch(`http://quizzapp/api/userquizzes/calculate`, {
+       let  response = await fetch(`http://40.71.42.59:8080/api/userquizzes/calculate`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

@@ -11,7 +11,7 @@ function Home() {
   async function getCategories (){
 
     //console.log(JSON.parse(localStorage.getItem('token')))
-    const  response = await fetch('http://quizzapp/api/categories', {
+    const  response = await fetch('http://40.71.42.59:8080/api/categories', {
       
       method: 'GET',
         headers: {
