@@ -51,7 +51,7 @@ public class QuestionRepository : IQuestionRepository
 
     public async Task<Question> UpdateQuestionAsync(Question question)
     {
-        _context.Questions.Add(question);
+        _context.Questions.Update(question);
         await _context.SaveChangesAsync();
 
         return question;

@@ -51,6 +51,8 @@ public class ApplicationProfile : Profile
 
         //Mapping Configuration for AnswerOption
         CreateMap<AnswerOptionRequest, AnswerOption>()
+            .ForMember(dest => dest.Text, opt =>
+                opt.MapFrom(src => src.OptionText))
             .ReverseMap();
 
         CreateMap<AnswerOption, AnswerOptionsDto>()
@@ -79,5 +81,17 @@ public class ApplicationProfile : Profile
             .ForMember(dest => dest.AnswerOptions, opt =>
                 opt.MapFrom(src => src.Question.Options))
             .ReverseMap();
+
+        //UserQuiz Mapping Configuration
+        CreateMap<UserQuizRequest, UserQuiz>();
+
+        CreateMap<UserQuiz, UserQuizDto>()
+            .ForMember(dest => dest.UserName, opt =>
+                opt.MapFrom(src => src.User.UserName))
+
+            .ForMember(dest => dest.QuizTitle, opt =>
+                opt.MapFrom(src => src.Quiz.Title))
+            .ReverseMap();
+            
     }
 }
